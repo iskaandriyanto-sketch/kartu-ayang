@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Kartu Cinta Ayang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+body {
+  margin:0; padding:0;
+  background: linear-gradient(#fbc2d9, #ffe6ef);
+  font-family: Arial;
+  display:flex; justify-content:center; align-items:center;
+  min-height:100vh; overflow:hidden;
+}
+.card, .open {
+  background:white; padding:30px; border-radius:20px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.1);
+  text-align:center; max-width:350px;
+}
+input {width:100%; padding:10px; margin:10px 0; border-radius:10px; border:1px solid #bbb;}
+button {padding:12px; width:100%; border:none; border-radius:10px; background:#ff6fa8; color:white; font-size:16px;}
+.heart {
+  position:absolute; color:#ff5f9e;
+  animation: float 5s linear infinite;
+}
+@keyframes float {
+  0% {transform:translateY(0); opacity:1;}
+  100% {transform:translateY(-120vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+  <div class="card" id="locked">
+    <img src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" width="120"/>
+    <h3>“love you ayang”</h3>
+    <input id="answer" placeholder="ketik jawabannya..." />
+    <button onclick="openCard()">Buka Kartu</button>
+  </div>
+
+  <div class="open" id="opened" style="display:none;">
+    <h2 style="color:#ff4f91;">❤️ Hai Ayang ❤️</h2>
+    <p>Semoga bisa menyegarkan harimu ayang,<br>semangat ngonten 😘✨</p>
+    <audio autoplay loop>
+      <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_6cbb777d8b.mp3?filename=romantic-piano-144427.mp3">
+    </audio>
+  </div>
+</div>
+
+<script>
+function openCard(){
+  const val = document.getElementById("answer").value.toLowerCase().trim();
+  if(val === "love you too"){
+    document.getElementById("locked").style.display="none";
+    document.getElementById("opened").style.display="block";
+    spawnHearts();
+  } else {
+    alert("Jawabannya belum tepat ayang 😘");
+  }
+}
+function spawnHearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (20+Math.random()*20)+"px";
+    h.textContent="❤️";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  },400);
+}
+</script>
+</body>
+</html>
